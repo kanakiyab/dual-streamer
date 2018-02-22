@@ -1,5 +1,5 @@
 # dual-streamer
----
+
 Stream hi resolution and low resolution video/camera simultaneously on Jetson TX2/TX1 boards.
 
 Build instructions:
@@ -12,7 +12,7 @@ cmake ..
 ```
 
 ## Information
----
+
 This will create two binaries in ```build/bin``` namely, ```gst-camera``` and ```gst-video```
 
 To run the video file, an appropriate video file must be input. It should be of high resolution (e.g. 2560 x 1440).
@@ -27,7 +27,7 @@ Set the RTSP stream resolution to 2560x1440 or else, the resolution should be ch
 
 
 ## Issue
----
+
 When the ```gst-camera``` is executed, in the current state, it is unable to capture the frames at a high resolution. When the ```gst-video``` is executed, the framerate drops quite significantly and hence the pipoeline of running detection and tracking is slowed down.
 
 ---
