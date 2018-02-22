@@ -11,7 +11,7 @@ cd build
 cmake ..
 ```
 
-##Information
+## Information
 ---
 This will create two binaries in ```build/bin``` namely, ```gst-camera``` and ```gst-video```
 
@@ -26,7 +26,7 @@ To run the camera file, which is only configured for an RTSP stream for dual-str
 Set the RTSP stream resolution to 2560x1440 or else, the resolution should be changed in the [gst-camera.cpp L#90](https://github.com/kanakiyab/dual-streamer/blob/1e7c600b6693c714043b1c33305232142367de18/camera/gst-camera/gst-camera.cpp#L90)
 
 
-##Issue
+## Issue
 ---
 When the ```gst-camera``` is executed, in the current state, it is unable to capture the frames at a high resolution. When the ```gst-video``` is executed, the framerate drops quite significantly and hence the pipoeline of running detection and tracking is slowed down.
 
