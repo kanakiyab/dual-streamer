@@ -2,6 +2,15 @@
 
 Stream hi resolution and low resolution video/camera simultaneously on Jetson TX2/TX1 boards.
 
+Make sure all the dependencies are installed by following below:
+```
+sudo apt-get update
+sudo apt-get install -y libqt4-dev qt4-dev-tools libglew-dev glew-utils libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev libglib2.0-dev
+
+sudo rm /usr/lib/aarch64-linux-gnu/libGL.so
+sudo ln -s /usr/lib/aarch64-linux-gnu/tegra/libGL.so /usr/lib/aarch64-linux-gnu/libGL.so
+```
+
 Build instructions:
 ```
 git clone https://github.com/kanakiyab/dual-streamer.git
