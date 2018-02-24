@@ -87,7 +87,7 @@ int main(int argc, char** argv) {
 
     // the video resolution for hi res is hard coded for now
     // TODO: Need to fix this
-    gstCamera* hiResCam = gstCamera::Create(2560, 1440, false,  DEFAULT_CAMERA);
+//    gstCamera* hiResCam = gstCamera::Create(2560, 1440, false,  DEFAULT_CAMERA);
 
 	/*
 	 * create openGL window
@@ -134,16 +134,16 @@ int main(int argc, char** argv) {
         void* bimgCPU = NULL;
 		
 		// get the latest frame
-        if (!camera->Capture(&imgCPU, &imgCUDA, 1000))
+        if (!camera->Capture(&imgCPU, &imgCUDA, &bimgCPU, 10000))
 			printf("\ngst-camera:  failed to capture frame\n");
 		else
             printf("gst-camera:  recieved new frame  CPU=0x%p  GPU=0x%p\n",
                    imgCPU, imgCUDA);
 
-        if (!hiResCam->Capture(&bimgCPU, NULL, 5000))
-            printf("\ngst-camera: failed to capture hi-res frame\n");
-        else
-            printf("gst-camera:  recieved new hi res frame CPU=0x%p\n", imgCPU);
+//        if (!hiResCam->Capture(&bimgCPU, NULL, 5000))
+//            printf("\ngst-camera: failed to capture hi-res frame\n");
+//        else
+//            printf("gst-camera:  recieved new hi res frame CPU=0x%p\n", imgCPU);
 		
 		// convert from YUV to RGBA
 		void* imgRGBA = NULL;

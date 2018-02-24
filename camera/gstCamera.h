@@ -53,7 +53,11 @@ public:
 	void Close();
 	
 	// Capture YUV (NV12)
-	bool Capture( void** cpu, void** cuda, unsigned long timeout=ULONG_MAX );
+//    bool Capture( void** cpu, void** cuda, unsigned long timeout=ULONG_MAX );
+
+    // Capture hi-res and low res together
+    bool Capture(void** cpu, void** cuda, void** hiresCPU,
+                 unsigned long timeout=ULONG_MAX);
 	
     // Takes in captured YUV-NV12 CUDA image, converts to float4 RGBA
     // (with pixel intensity 0-255)
@@ -77,17 +81,20 @@ public:
 private:
 	static void onEOS(_GstAppSink* sink, void* user_data);
 	static GstFlowReturn onPreroll(_GstAppSink* sink, void* user_data);
-	static GstFlowReturn onBuffer(_GstAppSink* sink, void* user_data);
+    static GstFlowReturn onBufferLR(_GstAppSink* sink, void* user_data);
+    static GstFlowReturn onBufferHR(_GstAppSink* sink, void* user_data);
 
 	gstCamera();
 	
     bool init(bool downscaled);
     bool buildLaunchStr(bool downscaled);
 	void checkMsgBus();
-	void checkBuffer();
+    void checkBufferLR();
+    void checkBufferHR();
 	
 	_GstBus*     mBus;
-	_GstAppSink* mAppSink;
+    _GstAppSink* mAppSinkLR;
+    _GstAppSink* mAppSinkHR;
 	_GstElement* mPipeline;
 
 	std::string  mLaunchStr;
@@ -102,6 +109,7 @@ private:
 	
 	void* mRingbufferCPU[NUM_RINGBUFFERS];
 	void* mRingbufferGPU[NUM_RINGBUFFERS];
+    void* mRingbufferHRCPU[NUM_RINGBUFFERS];
 	
 	QWaitCondition* mWaitEvent;
 	

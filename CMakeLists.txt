@@ -3,6 +3,20 @@ cmake_minimum_required(VERSION 3.2)
 project(streamer)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+set(BUILD_DEPS "YES" CACHE BOOL "If YES, will install dependencies into sandbox.  Automatically reset to NO after dependencies are installed.")
+
+
+# if this is the first time running cmake, perform pre-build dependency install script (or if the user manually triggers re-building the dependencies)
+if( ${BUILD_DEPS} )
+    message("Launching pre-build dependency installer script...")
+
+    execute_process(COMMAND sh ../CMakePrebuild.sh
+                WORKING_DIRECTORY ${PROJECT_BINARY_DIR}
+                RESULT_VARIABLE PREBUILD_SCRIPT_RESULT)
+
+    set(BUILD_DEPS "NO" CACHE BOOL "If YES, will install dependencies into sandbox.  Automatically reset to NO after dependencies are installed." FORCE)
+    message("Finished installing dependencies")
+endif()
 
 # setup project output paths
 set(PROJECT_OUTPUT_DIR  ${PROJECT_BINARY_DIR})
